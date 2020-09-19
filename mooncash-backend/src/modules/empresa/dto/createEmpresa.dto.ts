@@ -1,6 +1,7 @@
 import { IsNotEmpty, MaxLength, IsOptional, Length } from 'class-validator';
 
 export class CreateEmpresaDto {
+  idEmpresa: number;
 
   @IsNotEmpty()
   @MaxLength(50)

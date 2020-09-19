@@ -12,5 +12,5 @@ export class Empresa {
   nome: string;
 
   @Column()
-  cpnj: string;
+  cnpj: string;
 }
