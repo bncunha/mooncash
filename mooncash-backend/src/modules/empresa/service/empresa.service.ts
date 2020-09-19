@@ -12,13 +12,13 @@ export class EmpresaService {
   }
 
   criar(criarEmpresaDto: CriarAtualizarEmpresaDto) {
-    const novaEmpresa: Empresa = Object.assign(criarEmpresaDto, {});
+    const novaEmpresa: Empresa = new Empresa();
+    Object.assign(criarEmpresaDto, novaEmpresa);
     return this.empresaRepository.save(novaEmpresa);
   }
 
   async atualizar(empresaDto: CriarAtualizarEmpresaDto, idEmpresa: number) {
     const empresa = await this.empresaRepository.findOneOrFail(idEmpresa);
-    console.log(empresa);
     Object.assign(empresa, empresaDto);
     return this.empresaRepository.save(empresa);
   }
