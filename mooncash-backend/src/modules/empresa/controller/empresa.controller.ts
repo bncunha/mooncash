@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param } from '@nestjs/common';
 import { DefaultResponse } from 'src/core/DefaultResponse';
-import { CreateEmpresaDto } from '../dto/createEmpresa.dto';
+import { CriarAtualizarEmpresaDto } from '../dto/createEmpresa.dto';
 import { EmpresaService } from '../service/empresa.service';
 
 @Controller('empresa')
@@ -16,12 +16,21 @@ export class EmpresaController {
   }
 
   @Post()
-  criarEmpresa(@Body() criarEmpresaDto: CreateEmpresaDto) {
+  criarEmpresa(@Body() criarEmpresaDto: CriarAtualizarEmpresaDto) {
     try {
       return this.empresaService.criar(criarEmpresaDto);
     } catch (err) {
       return new DefaultResponse('Erro ao criar empresa:' + err).error();
     }
   }
+
+  @Put(':id')
+  atualizarEmpresa(@Body() criarEmpresaDto: CriarAtualizarEmpresaDto, @Param('id') idEmpresa: number) {
+    try {
+      return this.empresaService.atualizar(criarEmpresaDto, idEmpresa);
+    } catch(err) {
+      return new DefaultResponse('Erro ao atualizar empresa:' + err).error();
+    }
+  } 
 
 }
