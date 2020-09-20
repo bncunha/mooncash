@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, Put, Param } from '@nestjs/common';
 import { DefaultResponse } from 'src/core/DefaultResponse';
+import { deflate } from 'zlib';
 import { CriarAtualizarEmpresaDto } from '../dto/createEmpresa.dto';
 import { EmpresaService } from '../service/empresa.service';
 
@@ -18,6 +19,9 @@ export class EmpresaController {
   @Post()
   criarEmpresa(@Body() criarEmpresaDto: CriarAtualizarEmpresaDto) {
     try {
+      if (!criarEmpresaDto.usuario) {
+        return new DefaultResponse('Usuário é obrigatorio para criar empresa').error();
+      }
       return this.empresaService.criar(criarEmpresaDto);
     } catch (err) {
       return new DefaultResponse('Erro ao criar empresa:' + err).error();
