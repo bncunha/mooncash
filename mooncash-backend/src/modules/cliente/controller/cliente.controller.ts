@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
 import { DefaultResponse } from 'src/core/DefaultResponse';
 import { ClienteDto } from '../dto/criarCliente.dto';
 import { ClienteService } from '../service/cliente.service';
@@ -25,6 +25,15 @@ export class ClienteController {
       return this.clienteService.atualizarCliente(clienteDto, idCliente);
     } catch(err) {
       return new DefaultResponse('Erro ao atualizar cliente:' + err).error();
+    }
+  }
+
+  @Delete(':id')
+  deletarCliente(@Param('id') idCliente: number) {
+    try {
+      return this.clienteService.deletarCliente(idCliente);
+    } catch(err) {
+      return new DefaultResponse('Erro ao deletar cliente:' + err).error();
     }
   }
 }

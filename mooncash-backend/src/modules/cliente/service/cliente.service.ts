@@ -23,7 +23,10 @@ export class ClienteService {
   async atualizarCliente(clienteDto: ClienteDto, idCliente: number) {
     const cliente = await this.clienteRepository.findOneOrFail(idCliente);
     Object.assign(cliente, clienteDto);
-    console.log(cliente);
     return this.clienteRepository.save(cliente);
+  }
+
+  async deletarCliente(idCliente: number) {
+    return await this.clienteRepository.delete(idCliente);
   }
 }
