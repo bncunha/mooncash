@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Cliente } from 'src/models/Cliente.model';
 import { Empresa } from 'src/models/Empresa.model';
 import { Repository } from 'typeorm';
-import { CriarClienteDto } from '../dto/criarCliente.dto';
+import { ClienteDto } from '../dto/criarCliente.dto';
 
 @Injectable()
 export class ClienteService {
@@ -13,10 +13,17 @@ export class ClienteService {
     @InjectRepository(Empresa) private empresaRepository: Repository<Empresa>,
   ) {}
 
-  async ciarCliente(clienteDto: CriarClienteDto) {
+  async ciarCliente(clienteDto: ClienteDto) {
     const cliente = new Cliente();
     Object.assign(cliente, clienteDto);
     cliente.empresa = await this.empresaRepository.findOneOrFail(clienteDto.idEmpresa);
+    return this.clienteRepository.save(cliente);
+  }
+
+  async atualizarCliente(clienteDto: ClienteDto, idCliente: number) {
+    const cliente = await this.clienteRepository.findOneOrFail(idCliente);
+    Object.assign(cliente, clienteDto);
+    console.log(cliente);
     return this.clienteRepository.save(cliente);
   }
 }

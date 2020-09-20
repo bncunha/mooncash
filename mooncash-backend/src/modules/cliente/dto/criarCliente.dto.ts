@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional, Length, Matches, MaxLength, MinLength } from "class-validator";
 
-export class CriarClienteDto {
+export class ClienteDto {
 
   idCliente: number;
 
