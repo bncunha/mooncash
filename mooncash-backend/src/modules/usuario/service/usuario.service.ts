@@ -30,4 +30,10 @@ export class UsuarioService {
     return this.usuarioRepository.save(usuario);
   }
 
+  async findByLogin(login: string) {
+    return this.usuarioRepository.findOne({
+      where: { login }
+    })
+  }
+
 }
