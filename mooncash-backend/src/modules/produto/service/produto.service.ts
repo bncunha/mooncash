@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Empresa } from 'src/models/Empresa.model';
 import { Produto } from 'src/models/Produto.model';
 import { Repository } from 'typeorm';
 import { ProdutoDto } from '../dto/produto.dto';
@@ -11,8 +12,9 @@ export class ProdutoService {
     @InjectRepository(Produto) private produtoRepository: Repository<Produto> 
   ) {}
 
-  async criarProduto(produtoDto: ProdutoDto) {
+  async criarProduto(produtoDto: ProdutoDto, empresa: Empresa) {
     const produto = new Produto();
+    produto.empresa = empresa;
     Object.assign(produto, produtoDto);
     this.validarQuantidadeGrade(produto);
     return this.produtoRepository.save(produto);

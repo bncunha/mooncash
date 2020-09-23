@@ -22,4 +22,17 @@ export class EmpresaService {
     Object.assign(empresa, empresaDto);
     return this.empresaRepository.save(empresa);
   }
+
+  getLoggedEmpresa(req) {
+    const idEmpresa = req.user.empresa;
+    return this.empresaRepository.findOne(idEmpresa);
+  }
+
+  findEmpresaByIdUsuario(idUsuario: number) {
+    return this.empresaRepository.findOne({
+      where: {
+        usuario: { idUsuario }
+      }
+    })
+  }
 }

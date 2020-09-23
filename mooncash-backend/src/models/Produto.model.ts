@@ -1,4 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Empresa } from "./Empresa.model";
 import { GradeProduto } from "./GradeProduto.model";
 
 @Entity()
@@ -24,4 +25,9 @@ export class Produto {
     cascade: true
   })
   grade: GradeProduto[];
+
+  @ManyToOne(() => Empresa, {
+    nullable: false
+  })
+  empresa: Empresa;
 }
