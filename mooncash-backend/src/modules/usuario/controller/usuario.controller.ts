@@ -1,5 +1,4 @@
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
-import { DefaultResponse } from 'src/core/DefaultResponse';
+import { BadRequestException, Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { UsuarioDto } from '../dto/usuario.dto';
 import { UsuarioService } from '../service/usuario.service';
 
@@ -15,7 +14,7 @@ export class UsuarioController {
     try {
       return this.usuarioService.criarUsuario(usuarioDto);
     } catch (err) {
-      return new DefaultResponse('Erro ao criar usuario:' + err).error();
+     throw new BadRequestException('Erro ao criar usuario:' + err);
     }
   }
   
@@ -24,7 +23,7 @@ export class UsuarioController {
     try {
       return this.usuarioService.atualizarUsuario(usuarioDto, idUsuario);
     } catch (err) {
-      return new DefaultResponse('Erro ao atualizar usuario:' + err).error();
+     throw new BadRequestException('Erro ao atualizar usuario:' + err);
     }    
   }
 }

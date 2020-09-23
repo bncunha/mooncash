@@ -1,5 +1,4 @@
-import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
-import { DefaultResponse } from 'src/core/DefaultResponse';
+import { BadRequestException, Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
 import { ClienteDto } from '../dto/criarCliente.dto';
 import { ClienteService } from '../service/cliente.service';
 
@@ -15,7 +14,7 @@ export class ClienteController {
     try {
       return this.clienteService.ciarCliente(clienteDto);
     } catch(err) {
-      return new DefaultResponse('Erro ao criar cliente:' + err).error();
+      throw new BadRequestException('Erro ao criar cliente:' + err);
     }
   }
 
@@ -24,7 +23,7 @@ export class ClienteController {
     try {
       return this.clienteService.atualizarCliente(clienteDto, idCliente);
     } catch(err) {
-      return new DefaultResponse('Erro ao atualizar cliente:' + err).error();
+      throw new BadRequestException('Erro ao atualizar cliente:' + err);
     }
   }
 
@@ -33,7 +32,7 @@ export class ClienteController {
     try {
       return this.clienteService.deletarCliente(idCliente);
     } catch(err) {
-      return new DefaultResponse('Erro ao deletar cliente:' + err).error();
+      throw new BadRequestException('Erro ao deletar cliente:' + err);
     }
   }
 }

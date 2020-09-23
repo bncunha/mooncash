@@ -7,6 +7,7 @@ import { EmpresaModule } from './modules/empresa/empresa.module';
 import { ClienteModule } from './modules/cliente/cliente.module';
 import { UsuarioModule } from './modules/usuario/usuario.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ProdutoModule } from './modules/produto/produto.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { AuthModule } from './modules/auth/auth.module';
     EmpresaModule,
     ClienteModule,
     UsuarioModule,
-    AuthModule
+    AuthModule,
+    ProdutoModule
   ],
   controllers: [AppController],
   providers: [AppService],
