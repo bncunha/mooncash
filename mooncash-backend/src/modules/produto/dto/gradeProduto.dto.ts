@@ -2,6 +2,8 @@ import { IsNotEmpty, Min } from "class-validator";
 
 export class GradeProdutoDto {
 
+  idGradeProduto: number;
+
   @IsNotEmpty()
   nome: string;
 

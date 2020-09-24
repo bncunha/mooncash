@@ -10,14 +10,15 @@ export class Produto {
   @Column()
   nomeProduto: string;
 
-  @Column({nullable: true})
+  @Column({nullable: true, type: "double"})
   precoCusto: number;
 
-  @Column({nullable: true})
+  @Column({nullable: true, type: "double"})
   precoVenda: number;
 
   @Column({
-    default: 0
+    default: 0,
+    type: "double"
   })
   quantidade: number;
 

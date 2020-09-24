@@ -14,7 +14,8 @@ export class GradeProduto {
 
   @Column({
     nullable: false,
-    default: 0
+    default: 0,
+    type: 'double'
   })
   quantidade: number;
 

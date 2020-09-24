@@ -16,17 +16,23 @@ export class ProdutoService {
     const produto = new Produto();
     produto.empresa = empresa;
     Object.assign(produto, produtoDto);
-    this.validarQuantidadeGrade(produto);
+    produto.quantidade = this.somarQuantidadeGrade(produto);
     return this.produtoRepository.save(produto);
   }
 
-  private validarQuantidadeGrade(produto: Produto) {
+  async atualizarProduto(produtoDto: ProdutoDto, idProduto: number) {
+    const produto = await this.produtoRepository.findOneOrFail(idProduto, {relations: ['grade']});
+    Object.assign(produto, produtoDto);
+    produto.quantidade = this.somarQuantidadeGrade(produto);
+    return this.produtoRepository.save(produto);
+  }
+
+  private somarQuantidadeGrade(produto: Produto) {
     if (produto.grade && produto.grade.length) {
       let totalItensGrade = 0;
       produto.grade.forEach(g => totalItensGrade += g.quantidade);
-      if (produto.quantidade != totalItensGrade) {
-        throw "A quantidade de itens do produto não bateu com a da grade";
-      }
+      return totalItensGrade;
     }
+    return produto.quantidade;
   }
 }
