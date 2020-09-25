@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Empresa } from "./Empresa.model";
 import { GradeProduto } from "./GradeProduto.model";
+import { ItemPedido } from "./ItemPedido.model";
 
 @Entity()
 export class Produto {
@@ -31,4 +32,7 @@ export class Produto {
     nullable: false
   })
   empresa: Empresa;
+
+  @OneToMany(() => ItemPedido, itemP => itemP.produto)
+  itensPedido: ItemPedido[];
 }
