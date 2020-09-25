@@ -8,6 +8,7 @@ import { ClienteModule } from './modules/cliente/cliente.module';
 import { UsuarioModule } from './modules/usuario/usuario.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ProdutoModule } from './modules/produto/produto.module';
+import { PedidoModule } from './modules/pedido/pedido.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { ProdutoModule } from './modules/produto/produto.module';
     ClienteModule,
     UsuarioModule,
     AuthModule,
-    ProdutoModule
+    ProdutoModule,
+    PedidoModule
   ],
   controllers: [AppController],
   providers: [AppService],
