@@ -21,6 +21,14 @@ export class PedidoDto {
   @IsEnum(StatusPedido)
   status: StatusPedido;
 
+  @IsOptional()
+  @IsNumber()
+  valorEntrada: number;
+
+  @IsOptional()
+  @IsNumber()
+  valorDesconto: number;
+
   @IsNotEmpty()
   @IsNumber()
   valorTotal: number;

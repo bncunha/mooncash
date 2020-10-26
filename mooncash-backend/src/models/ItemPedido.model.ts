@@ -21,11 +21,11 @@ export class ItemPedido {
   @Column({type: 'double'})
   valorTotal: number;
 
-  @ManyToOne(() => Produto, produto => produto.itensPedido, {
-    onDelete: 'CASCADE'
-  })
+  @ManyToOne(() => Produto, produto => produto.itensPedido)
   produto: Produto;
 
-  @ManyToOne(() => Pedido, pedido => pedido.itensPedido)
+  @ManyToOne(() => Pedido, pedido => pedido.itensPedido, {
+    onDelete: 'CASCADE'
+  })
   pedido: Pedido;
 }

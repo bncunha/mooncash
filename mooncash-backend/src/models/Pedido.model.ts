@@ -11,7 +11,7 @@ export class Pedido {
   @Column()
   dataInicio: Date;
 
-  @Column()
+  @Column({nullable: true})
   dataFim: Date;
 
   @Column()
@@ -29,9 +29,17 @@ export class Pedido {
   @Column({type: 'double'})
   valorTotal: number;
 
+  @Column({type: 'double'})
+  valorDesconto: number;
+
+  @Column({type: 'double'})
+  valorEntrada: number;
+
   @ManyToOne(() => Cliente, cliente => cliente.pedidos)
   cliente: Cliente;
 
-  @OneToMany(() => ItemPedido, itemP => itemP.pedido)
+  @OneToMany(() => ItemPedido, itemP => itemP.pedido, {
+    cascade: true
+  })
   itensPedido: ItemPedido[];
 }
